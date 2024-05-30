@@ -6,6 +6,7 @@ import 'package:my_gallery/Presentation/view_models/login_view_model/password/lo
 import 'package:my_gallery/Presentation/view_models/login_view_model/password/login_view_model_state.dart';
 import 'package:my_gallery/Presentation/view_models/login_view_model/password/pass_provider.dart';
 import 'package:my_gallery/Presentation/views/login/widget/custom_text_field.dart';
+import 'package:my_gallery/Presentation/views/login/widget/password_text_field.dart';
 import 'package:my_gallery/core/Utils/assets.dart';
 import 'package:my_gallery/core/Utils/routes.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +19,6 @@ class LoginScreen extends StatelessWidget {
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
     GlobalKey<FormState> formfkey = GlobalKey();
-    PasswordProvider passwordProvider = Provider.of<PasswordProvider>(context);
     return BlocListener<LoginViewModel, LoginViewModelState>(
       listener: (context, state) {
         if (state is LoginViewModeSuccess) {
@@ -127,36 +127,7 @@ class LoginScreen extends StatelessWidget {
                                 SizedBox(
                                   height: 20.h,
                                 ),
-                                CustomTextField(
-                                  hintName: 'Password',
-                                  isSecure: passwordProvider.passSecure,
-                                  sufix: passwordProvider.passSecure
-                                      ? IconButton(
-                                          onPressed: () {
-                                            passwordProvider.changePassSecure(
-                                                !passwordProvider.passSecure);
-                                          },
-                                          icon: const Icon(
-                                            Icons.visibility_off,
-                                          ),
-                                          enableFeedback: false,
-                                        )
-                                      : IconButton(
-                                          onPressed: () {
-                                            passwordProvider.changePassSecure(
-                                                !passwordProvider.passSecure);
-                                          },
-                                          icon: const Icon(Icons.visibility),
-                                          enableFeedback: false,
-                                        ),
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return "this field can't be empty";
-                                    }
-                                    return null;
-                                  },
-                                  controller: passwordController,
-                                ),
+                                PasswordTextFieldWidget(passwordController: passwordController),
                                 SizedBox(
                                   height: 20.h,
                                 ),
