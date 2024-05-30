@@ -15,22 +15,25 @@ class LoginDataSourceImpl extends LoginDataSource {
   @override
   Future<Either<LoginResponse, String>> loginRequest(
       {required String email, required String password}) async {
-    var response =
-        await apiManager.postRequest(endPoints: EndPoints.loginEndPoint, body: {
-      "email": email,
-      "password": password,
-    }, token: '',);
+    var response = await apiManager.postRequest(
+      endPoints: EndPoints.loginEndPoint,
+      body: {
+        "email": email,
+        "password": password,
+      },
+      token: '',
+    );
     try {
       if (response.statusCode == 200) {
         LoginResponse loginResponse = LoginResponse.fromJson(response.data);
-        log(loginResponse.token ?? "");
+        if (loginResponse.token == '') {
+          return const Right("no data");
+        }
         return Left(loginResponse);
       } else {
-        log('Error: ${response.statusCode}');
         return Right('Error: ${response.statusCode}');
       }
     } catch (error) {
-      log(error.toString());
       return Right(error.toString());
     }
   }

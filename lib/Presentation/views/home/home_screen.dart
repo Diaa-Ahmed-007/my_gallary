@@ -2,11 +2,11 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_gallery/Presentation/view_models/home_view_model/display/display_view_model_cubit.dart';
 import 'package:my_gallery/Presentation/view_models/home_view_model/display/display_view_model_state.dart';
@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     File? file;
-    late LoginResponse loginResponse =
+    LoginResponse loginResponse =
         ModalRoute.of(context)?.settings.arguments as LoginResponse;
     UploadProvider uploadProvider = Provider.of<UploadProvider>(context);
     DisplayViewModel.get(context).display(token: loginResponse.token ?? "");
@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
           uploadProvider.changeIsShown(false);
         }
         if (state is UploadViewModeError) {
-          log("error");
+          log(state.error);
         }
         showDialog(
           context: context,
@@ -61,10 +61,7 @@ class HomeScreen extends StatelessWidget {
             toolbarHeight: 70.h,
             title: Text(
               "Welcome\n${loginResponse.user?.name ?? ""}",
-              style: GoogleFonts.baloo2(
-                  color: const Color(0xff4A4A4A),
-                  fontSize: 24.sp,
-                  fontWeight: FontWeight.w500),
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             actions: [
               Padding(
@@ -164,7 +161,6 @@ class HomeScreen extends StatelessWidget {
                             XFile? xfile = await ImagePicker()
                                 .pickImage(source: ImageSource.gallery);
                             file = File(xfile?.path ?? "");
-                            log(file.toString());
                             UploadViewModel.get(context).upload(
                                 filePath: xfile?.path ?? "",
                                 token: loginResponse.token ?? "");
@@ -182,7 +178,6 @@ class HomeScreen extends StatelessWidget {
                             XFile? xfile = await ImagePicker()
                                 .pickImage(source: ImageSource.camera);
                             file = File(xfile?.path ?? "");
-                            log(file.toString());
                             UploadViewModel.get(context).upload(
                                 filePath: xfile?.path ?? "",
                                 token: loginResponse.token ?? "");

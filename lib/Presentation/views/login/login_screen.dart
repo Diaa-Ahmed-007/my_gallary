@@ -1,9 +1,7 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:my_gallery/Presentation/view_models/login_view_model/password/login_view_model_cubit.dart';
 import 'package:my_gallery/Presentation/view_models/login_view_model/password/login_view_model_state.dart';
 import 'package:my_gallery/Presentation/view_models/login_view_model/password/pass_provider.dart';
@@ -19,8 +17,6 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
-    emailController.text = "naufderhar@example.com";
-    passwordController.text = "password";
     GlobalKey<FormState> formfkey = GlobalKey();
     PasswordProvider passwordProvider = Provider.of<PasswordProvider>(context);
     return BlocListener<LoginViewModel, LoginViewModelState>(

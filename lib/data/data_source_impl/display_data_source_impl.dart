@@ -22,7 +22,6 @@ class DisplayDataSourceImpl extends DisplayDataSource {
         // queryParameters: {"token": token}
       );
       GalleryResponse galleryResponse = GalleryResponse.fromJson(response.data);
-      log(galleryResponse.message??"");
       return Left(galleryResponse);
     } catch (error) {
       return Right(error.toString());

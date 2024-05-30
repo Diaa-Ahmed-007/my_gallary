@@ -43,7 +43,6 @@ class UploadDataSourceImpl extends UploadDataSource {
           UploadPhotoResponse.fromJson(response.data);
       return Left(uploadPhotoResponse);
     } catch (error) {
-      log('DioError: $error - $error');
       rethrow;
     }
   }

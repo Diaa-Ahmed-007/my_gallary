@@ -6,7 +6,7 @@ class ThemeDataMode {
   static ThemeData themeData = ThemeData(
     textTheme: TextTheme(
       bodyLarge: GoogleFonts.rubik(
-        fontSize: 30.sp,
+        fontSize: 28.sp,
         fontWeight: FontWeight.w800,
         color: const Color(0xff4A4A4A),
       ), // for my gellary
@@ -27,6 +27,11 @@ class ThemeDataMode {
         fontWeight: FontWeight.w200,
         color: const Color(0xff4A4A4A),
       ),//for text style in text field
+      titleLarge: GoogleFonts.baloo2(
+                  color: const Color(0xff4A4A4A),
+                  fontSize: 24.sp,
+                  fontWeight: FontWeight.w500),
+                  //for welcome below home screen
     ),
   );
 }
