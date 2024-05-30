@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -25,7 +23,6 @@ class UploadDataSourceImpl extends UploadDataSource {
 
       var response = await ApiManager.dio.post(
         EndPoints.uploadEndPoint,
-        
         data: formData,
       );
 
