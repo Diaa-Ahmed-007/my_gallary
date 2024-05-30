@@ -1,3 +1,5 @@
 class EndPoints {
-  static String endPoint = '/MyGallery.postman_collection.json';
+  static String loginEndPoint = '/api/auth/login';
+  static String uploadEndPoint = "/api/upload";
+  static String displayEndPoint = "/api/my-gallery";
 }

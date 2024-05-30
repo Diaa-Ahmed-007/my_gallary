@@ -3,15 +3,17 @@ import 'package:injectable/injectable.dart';
 import 'package:my_gallery/core/constants.dart';
 
 @singleton
-class ApiManger {
+class ApiManager {
   static late Dio dio;
   static init() {
     dio = Dio(
       BaseOptions(
         baseUrl: Constants.apiPath,
+        headers: {"Content-Type": "application/json"},
       ),
     );
   }
+
   Future<Response> getRequest(
       {required String endPoints,
       Map<String, dynamic>? queryParameters}) async {
@@ -23,9 +25,15 @@ class ApiManger {
     return response;
   }
 
-  Future<Response> postRequest(
-      {required String endPoints, Map<String, dynamic>? body}) async {
-    var response = await dio.post(endPoints, data: body);
+  Future<Response> postRequest({
+    required String endPoints,
+    Map<String, dynamic>? body,
+    required String token,
+  }) async {
+    var response = await dio.post(
+      endPoints,
+      data: body,
+    );
     return response;
   }
 }

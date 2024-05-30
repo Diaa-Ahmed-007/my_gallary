@@ -38,17 +38,20 @@ dependencies:
   dio: ^5.4.3+1
   dartz: ^0.10.1
   injectable: ^2.4.2
+  get_it:
   flutter_screenutil: ^5.9.1
   google_fonts: ^6.2.1
   flutter_svg: ^2.0.10+1
   flutter_bloc: ^8.1.5
   provider: ^6.1.2
   http: ^1.2.1
+  image_picker: ^1.1.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  injectable_generator:
+  build_runner:
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your

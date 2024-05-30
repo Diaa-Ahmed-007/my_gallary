@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:my_gallery/Presentation/view_models/login_view_model/password/pass_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+typedef ValidationFieled = String? Function(String?)?;
 
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
@@ -9,18 +10,23 @@ class CustomTextField extends StatelessWidget {
     required this.hintName,
     this.isSecure,
     this.sufix,
+    required this.validator,
+    required this.controller,
   });
   final String hintName;
   final bool? isSecure;
   final Widget? sufix;
+  final ValidationFieled validator;
+  final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
-    PasswordProvider passwordProvider = Provider.of<PasswordProvider>(context);
     return TextFormField(
+      validator: validator,
+      controller: controller,
       //basic styles
       cursorWidth: 2,
       cursorHeight: 22,
-      style: const TextStyle(),
+      style: Theme.of(context).textTheme.labelSmall,
       obscureText: isSecure ?? false,
       cursorColor: Colors.deepPurple[500]!,
       decoration: InputDecoration(
@@ -30,7 +36,7 @@ class CustomTextField extends StatelessWidget {
         filled: true,
         //hint
         hintText: hintName,
-        hintStyle: const TextStyle(fontSize: 18, color: Colors.grey),
+        hintStyle: Theme.of(context).textTheme.bodySmall,
         //suffixIcon widget
         suffixIcon: sufix,
         suffixIconColor: Colors.grey,
